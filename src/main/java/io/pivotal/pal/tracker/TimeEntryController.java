@@ -42,7 +42,10 @@ public class TimeEntryController {
         return responseEntity;
     }
 
-    @PutMapping("/time-entries/{timeEntryId}")
+    @RequestMapping(
+            value = "/time-entries/{timeEntryId}",
+            produces = "application/json",
+            method = {RequestMethod.PUT})
     public ResponseEntity update(@PathVariable long timeEntryId, @RequestBody TimeEntry timeEntry) {
         TimeEntry updatedtTimeEntry = timeEntryRepository.update(timeEntryId, timeEntry);
         if (updatedtTimeEntry == null) {
@@ -54,7 +57,10 @@ public class TimeEntryController {
         }
     }
 
-    @DeleteMapping("/time-entries/{timeEntryId}")
+    @RequestMapping(
+            value = "/time-entries/{timeEntryId}",
+            produces = "application/json",
+            method = {RequestMethod.DELETE})
     public ResponseEntity delete(@PathVariable long timeEntryId) {
         timeEntryRepository.delete(timeEntryId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
