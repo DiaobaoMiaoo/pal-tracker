@@ -5,36 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TimeEntryRepository {
-    private Map<Long, TimeEntry> timeEntryMap = new HashMap<>();
+public interface TimeEntryRepository {
 
-    private Long idCounter = 1L;
+    public TimeEntry create(TimeEntry timeEntry);
 
-    public TimeEntry create(TimeEntry timeEntry) {
-        timeEntryMap.put(idCounter,timeEntry);
-        timeEntry.setId(idCounter);
-        idCounter++;
-        return timeEntry;
-    }
+    public TimeEntry find(Long id);
+    public List<TimeEntry> list();
 
-    public TimeEntry find(long id) {
-        return timeEntryMap.get(id);
-    }
+    public TimeEntry update(Long id, TimeEntry timeEntry);
 
-    public List<TimeEntry> list() {
-        return new ArrayList<>(timeEntryMap.values());
-    }
-
-    public TimeEntry update(long id, TimeEntry timeEntry) {
-        if(timeEntryMap.get(id) == null) return null;
-        timeEntryMap.put(id, timeEntry);
-        timeEntry.setId(id);
-        return timeEntry;
-    }
-
-    public void delete(long id) {
-        timeEntryMap.remove(id);
-    }
+    public void delete(Long id);
 
 //    public TimeEntry create(TimeEntry any);
 //

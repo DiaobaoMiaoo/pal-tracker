@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class InMemoryTimeEntryRepository extends TimeEntryRepository{
+public class InMemoryTimeEntryRepository implements TimeEntryRepository{
 
     private Map<Long, TimeEntry> timeEntryMap = new HashMap<>();
 
@@ -19,7 +19,7 @@ public class InMemoryTimeEntryRepository extends TimeEntryRepository{
         return timeEntry;
     }
 
-    public TimeEntry find(long id) {
+    public TimeEntry find(Long id) {
         return timeEntryMap.get(id);
     }
 
@@ -27,14 +27,14 @@ public class InMemoryTimeEntryRepository extends TimeEntryRepository{
         return new ArrayList<>(timeEntryMap.values());
     }
 
-    public TimeEntry update(long id, TimeEntry timeEntry) {
+    public TimeEntry update(Long id, TimeEntry timeEntry) {
         if(timeEntryMap.get(id) == null) return null;
         timeEntryMap.put(id, timeEntry);
         timeEntry.setId(id);
         return timeEntry;
     }
 
-    public void delete(long id) {
+    public void delete(Long id) {
         timeEntryMap.remove(id);
     }
 }
